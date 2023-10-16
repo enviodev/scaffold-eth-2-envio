@@ -1,6 +1,15 @@
 type Greeting @entity {
   id: ID!
-  greetings: [String!]!
-  latestGreeting: String!
-  numberOfGreetings: Int!
+  user: String!
+  greeting: String!
+  value: BigInt!
+  premium: Boolean!
+}
+
+type User @entity {
+  id: ID!
+  address: String!
+  greetings: [Greeting!]! @derivedFrom(field: "user")
+  greetingsCount: Int!
+  premium: Boolean!
 }
