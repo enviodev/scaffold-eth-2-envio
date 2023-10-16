@@ -13,7 +13,7 @@
     "account": "pnpm -F @se-2/hardhat run account",
     "chain": "pnpm -F @se-2/hardhat run chain",
     "fork": "pnpm -F @se-2/hardhat run fork",
-    "deploy": "pnpm -F @se-2/hardhat run deploy",
+    "hardhat:deploy": "pnpm -F @se-2/hardhat run deploy",
     "verify": "pnpm -F @se-2/hardhat run verify",
     "compile": "pnpm -F @se-2/hardhat run compile",
     "generate": "pnpm -F @se-2/hardhat run generate",
