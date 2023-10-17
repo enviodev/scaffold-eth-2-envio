@@ -21,6 +21,7 @@ Before you begin, you need to install the following tools:
 
 - [Node (v18 LTS)](https://nodejs.org/en/download/)
 - [pnpm (v8.7.1+)](https://pnpm.io/installation)
+- [docker](https://docs.docker.com/engine/install/)
 - [Git](https://git-scm.com/downloads)
 
 ## Quickstart
@@ -51,7 +52,19 @@ pnpm hardhat:deploy
 
 This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `pnpm hardhat:deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
 
-4. On a third terminal, start your NextJS app:
+4. Ensure docker is running and then on a third terminal, start-up indexer:
+
+```
+pnpm envio:dev
+```
+
+This command will run a codegen for your configured envio indexer, it will install all required packages, handle db-migrations and graphql server, and begin indexing your smart contract events.
+
+Visit the hasura console on: `http://localhost:8085`. You can see the realtime indexing of data in the "data" tab and use the graphql explorer to build queries.
+
+For more info on writing/updating an indexer visit [docs.envio.dev/docs](https://docs.envio.dev/docs/overview).
+
+5. On a third terminal, start your NextJS app:
 
 ```
 pnpm start
