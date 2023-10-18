@@ -154,7 +154,7 @@ const EnvioData: React.FC = () => {
     pollInterval: 500,
   });
 
-  const selectedUser = selectedUserIndex && data ? data.User[selectedUserIndex] : null;
+  const selectedUser = selectedUserIndex !== null && data ? data.User[selectedUserIndex] : null;
 
   const dataExists = (data?.User.length ?? 0) > 0;
 
