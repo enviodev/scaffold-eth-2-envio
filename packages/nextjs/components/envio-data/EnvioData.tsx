@@ -7,6 +7,7 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { formatEther, parseEther } from "viem";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { LoaderIcon } from "react-hot-toast";
+import { Address as HexString } from "blo";
 
 type Greeting = {
   id: string;
@@ -23,19 +24,28 @@ type User = {
   greetings: Greeting[];
 };
 
-type SetSelectedUserFn = (user: User) => void;
-
-const UserRow = ({ user, setSelectedUser }: { user: User; setSelectedUser: SetSelectedUserFn }) => {
+const UserRow = ({
+  user,
+  userIndex,
+  setSelectedUserIndex,
+}: {
+  user: User;
+  userIndex: number;
+  setSelectedUserIndex: (userIndex: number) => void;
+}) => {
   const { address, premium, greetingsCount } = user;
   return (
     <tr className="hover text-sm">
       <td className="w-1/12 md:py-4">
-        <Address address={address} />
+        <Address address={address as HexString} />
       </td>
       <td className="w-2/12 md:py-4">{premium ? `👑` : ""}</td>
       <td className="w-1/12 md:py-4">{greetingsCount}</td>
       <td className="w-1/12 md:py-4">
-        <button onClick={() => setSelectedUser(user)} className="btn btn-primary btn-xs w-32 flex hover:text-secondary">
+        <button
+          onClick={() => setSelectedUserIndex(userIndex)}
+          className="btn btn-primary btn-xs w-32 flex hover:text-secondary"
+        >
           <span className="text-xs">Greetings</span> <ChevronRightIcon width={15} />
         </button>
       </td>
@@ -43,7 +53,13 @@ const UserRow = ({ user, setSelectedUser }: { user: User; setSelectedUser: SetSe
   );
 };
 
-const UsersTable = ({ users, setSelectedUser }: { users: User[]; setSelectedUser: (user: User) => void }) => {
+const UsersTable = ({
+  users,
+  setSelectedUserIndex,
+}: {
+  users: User[];
+  setSelectedUserIndex: (userIndex: number) => void;
+}) => {
   return (
     <div className="flex justify-center px-4 md:px-0">
       <div className="overflow-x-auto w-full shadow-2xl rounded-xl">
@@ -57,8 +73,8 @@ const UsersTable = ({ users, setSelectedUser }: { users: User[]; setSelectedUser
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
-              <UserRow key={user.id} user={user} setSelectedUser={setSelectedUser} />
+            {users.map((user, i) => (
+              <UserRow key={user.id} user={user} userIndex={i} setSelectedUserIndex={setSelectedUserIndex} />
             ))}
           </tbody>
         </table>
@@ -93,7 +109,7 @@ const SelectedUserTable = ({ user, goBack }: { user: User; goBack: () => void })
             <ChevronLeftIcon width={20} /> <span>BACK</span>
           </button>
 
-          <Address address={address} />
+          <Address address={address as HexString} />
           <div className="p-3">{premium ? `👑` : ""}</div>
         </div>
         <table className="table text-xl bg-base-100 table-zebra w-full md:table-md table-sm">
@@ -132,19 +148,22 @@ const GET_USERS = gql(`
 `);
 
 const EnvioData: React.FC = () => {
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUserIndex, setSelectedUserIndex] = useState<number | null>(null);
+
   const { loading, data } = useQuery(GET_USERS, {
     pollInterval: 500,
   });
+
+  const selectedUser = selectedUserIndex && data ? data.User[selectedUserIndex] : null;
 
   const dataExists = (data?.User.length ?? 0) > 0;
 
   return (
     <div className="w-full max-w-2xl">
       {selectedUser ? (
-        <SelectedUserTable user={selectedUser} goBack={() => setSelectedUser(null)} />
+        <SelectedUserTable user={selectedUser} goBack={() => setSelectedUserIndex(null)} />
       ) : data && dataExists ? (
-        <UsersTable users={data.User} setSelectedUser={setSelectedUser} />
+        <UsersTable users={data.User} setSelectedUserIndex={setSelectedUserIndex} />
       ) : loading ? (
         <div className="flex items-center gap-2 w-full justify-center p-10">
           Loading Envio Data...
