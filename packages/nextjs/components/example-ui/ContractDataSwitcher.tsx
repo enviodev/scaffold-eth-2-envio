@@ -30,7 +30,7 @@ const ContractDataSwitcher: React.FC = () => {
           Data Visualizer
         </button>
       </div>
-      <div className="h-full flex flex-col justify-center items-center">
+      <div className="h-full w-full flex flex-col justify-center items-center">
         {selectedContent === "envio-data" ? <EnvioData /> : <ContractData />}
       </div>
     </div>

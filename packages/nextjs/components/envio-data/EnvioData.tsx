@@ -35,8 +35,8 @@ const UserRow = ({ user, setSelectedUser }: { user: User; setSelectedUser: SetSe
       <td className="w-2/12 md:py-4">{premium ? `👑` : ""}</td>
       <td className="w-1/12 md:py-4">{greetingsCount}</td>
       <td className="w-1/12 md:py-4">
-        <button onClick={() => setSelectedUser(user)} className="btn btn-primary btn-sm flex hover:text-secondary">
-          <span>Greetings</span> <ChevronRightIcon width={15} />
+        <button onClick={() => setSelectedUser(user)} className="btn btn-primary btn-xs w-32 flex hover:text-secondary">
+          <span className="text-xs">Greetings</span> <ChevronRightIcon width={15} />
         </button>
       </td>
     </tr>
@@ -133,20 +133,26 @@ const GET_USERS = gql(`
 
 const EnvioData: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const { data } = useQuery(GET_USERS, {
+  const { loading, data } = useQuery(GET_USERS, {
     pollInterval: 500,
   });
+
+  const dataExists = (data?.User.length ?? 0) > 0;
 
   return (
     <div className="w-full max-w-2xl">
       {selectedUser ? (
         <SelectedUserTable user={selectedUser} goBack={() => setSelectedUser(null)} />
-      ) : data ? (
+      ) : data && dataExists ? (
         <UsersTable users={data.User} setSelectedUser={setSelectedUser} />
-      ) : (
+      ) : loading ? (
         <div className="flex items-center gap-2 w-full justify-center p-10">
           Loading Envio Data...
           <LoaderIcon />
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 w-full justify-center p-10">
+          No Data Indexed. Run local chain and indexer.
         </div>
       )}
     </div>
