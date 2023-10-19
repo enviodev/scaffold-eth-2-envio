@@ -55,16 +55,22 @@ This command deploys a test smart contract to the local network. The contract is
 4. Ensure docker is running and then on a third terminal, start-up indexer:
 
 ```
+pnpm envio:codegen
+```
+
+and then:
+
+```
 pnpm envio:dev
 ```
 
-This command will run a codegen for your configured envio indexer, it will install all required packages, handle db-migrations and graphql server, and begin indexing your smart contract events.
+This will run a codegen for your configured envio indexer, it will install all required packages, handle db-migrations and graphql server, and begin indexing your smart contract events.
 
-Visit the hasura console on: `http://localhost:8085`. You can see the realtime indexing of data in the "data" tab and use the graphql explorer to build queries.
+Visit the hasura console on: `http://localhost:8080`. You can see the realtime indexing of data in the "data" tab and use the graphql explorer to build queries.
 
 For more info on writing/updating an indexer visit [docs.envio.dev/docs](https://docs.envio.dev/docs/overview).
 
-5. On a third terminal, start your NextJS app:
+5. On a fourth terminal, start your NextJS app:
 
 ```
 pnpm start
@@ -77,6 +83,7 @@ Run smart contract test with `pnpm hardhat:test`
 - Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
 - Edit your frontend in `packages/nextjs/pages`
 - Edit your deployment scripts in `packages/hardhat/deploy`
+- Edit your envio indexer config.yaml, schema.graphql and EventHandlers.ts in `packages/envio-indexer`
 
 ## Documentation
 
