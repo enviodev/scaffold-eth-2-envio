@@ -9,7 +9,7 @@ const addGreeting: DeployFunction = async function (hre: HardhatRuntimeEnvironme
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
     When deploying to live networks (e.g `pnpm deploy --network goerli`), the deployer account
-    should have sufficient balance to pay for the gas fees for contract creation.
+    should have sufficient balance to pay for the gas fees for contract interaction.
 
     You can generate a random account with `pnpm generate` which will fill DEPLOYER_PRIVATE_KEY
     with a random private key in the .env file (then used on hardhat.config.ts)
