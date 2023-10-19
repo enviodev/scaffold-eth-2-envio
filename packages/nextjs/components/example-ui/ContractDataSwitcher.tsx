@@ -11,7 +11,6 @@ const ContractDataSwitcher: React.FC = () => {
   const unselectedClassName =
     "bg-primary-content text-primary hover:bg-secondary hover:text-primary-content hover:border border-primary ease-in duration-100";
 
-  console.log("test", selectedContent === "envio-data");
   return (
     <div className="flex flex-col items-center bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw] ">
       <div className="text-lg rounded-full flex w-full max-w-sm">
