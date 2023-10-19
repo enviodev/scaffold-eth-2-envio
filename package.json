@@ -9,32 +9,36 @@
     ]
   },
   "scripts": {
-    "account": "yarn workspace @se-2/hardhat account",
-    "chain": "yarn workspace @se-2/hardhat chain",
-    "fork": "yarn workspace @se-2/hardhat fork",
-    "deploy": "yarn workspace @se-2/hardhat deploy",
-    "verify": "yarn workspace @se-2/hardhat verify",
-    "compile": "yarn workspace @se-2/hardhat compile",
-    "generate": "yarn workspace @se-2/hardhat generate",
-    "hardhat:lint": "yarn workspace @se-2/hardhat lint",
-    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
-    "hardhat:test": "yarn workspace @se-2/hardhat test",
-    "test": "yarn hardhat:test",
-    "start": "yarn workspace @se-2/nextjs dev",
-    "next:lint": "yarn workspace @se-2/nextjs lint",
-    "next:format": "yarn workspace @se-2/nextjs format",
-    "next:check-types": "yarn workspace @se-2/nextjs check-types",
+    "preinstall": "npx only-allow pnpm",
+    "account": "pnpm -F @se-2/hardhat run account",
+    "chain": "pnpm -F @se-2/hardhat run chain",
+    "fork": "pnpm -F @se-2/hardhat run fork",
+    "hardhat:deploy": "pnpm -F @se-2/hardhat run deploy",
+    "verify": "pnpm -F @se-2/hardhat run verify",
+    "compile": "pnpm -F @se-2/hardhat run compile",
+    "generate": "pnpm -F @se-2/hardhat run generate",
+    "hardhat:lint": "pnpm -F @se-2/hardhat run lint",
+    "hardhat:lint-staged": "pnpm -F @se-2/hardhat run lint-staged",
+    "hardhat:test": "pnpm -F @se-2/hardhat run test",
+    "envio:codegen": "pnpm -F @se-2/envio run codegen",
+    "envio:dev": "pnpm -F @se-2/envio run dev",
+    "envio:start": "pnpm -F @se-2/envio run start",
+    "start": "pnpm -F @se-2/nextjs run dev",
+    "next:lint": "pnpm -F @se-2/nextjs run lint",
+    "next:format": "pnpm -F @se-2/nextjs run format",
+    "next:check-types": "pnpm -F @se-2/nextjs run check-types",
+    "test": "pnpm -F @se-2/hardhat run test",
     "postinstall": "husky install",
     "precommit": "lint-staged",
-    "vercel": "yarn workspace @se-2/nextjs vercel",
-    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo"
+    "vercel": "pnpm -F @se-2/nextjs run vercel",
+    "vercel:yolo": "pnpm -F @se-2/nextjs run vercel:yolo"
   },
-  "packageManager": "yarn@3.2.3",
+  "engines": {
+    "node": ">=16.14.0",
+    "pnpm": ">=8.7.1"
+  },
   "devDependencies": {
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3"
-  },
-  "resolutions": {
-    "usehooks-ts@^2.7.2": "patch:usehooks-ts@npm:^2.7.2#./.yarn/patches/usehooks-ts-npm-2.7.2-fceffe0e43.patch"
   }
 }

@@ -1,0 +1,15 @@
+name: YourContract
+description: YourContract indexer
+networks:
+  - id: 31337 #Hardhat
+    start_block: 0
+    rpc_config:
+      url: http://127.0.0.1:8545 #rpc url for local hardhat network
+    contracts:
+      - name: Greeting
+        address: "0x5fbdb2315678afecb367f032d93f642f64180aa3"
+        handler: src/EventHandlers.ts
+        events:
+          - event: "GreetingChange(address indexed greetingSetter, string newGreeting, bool premium, uint256 value)"
+            requiredEntities:
+              - name: User

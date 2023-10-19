@@ -1,0 +1,20 @@
+{
+  "name": "@se-2/envio",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "tsc --clean",
+    "build": "tsc --build",
+    "watch": "tsc --watch",
+    "dev": "envio dev",
+    "codegen": "envio codegen",
+    "start": "ts-node generated/src/Index.bs.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1",
+    "envio": "0.0.20"
+  }
+}
