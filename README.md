@@ -20,7 +20,7 @@
 Before you begin, you need to install the following tools:
 
 - [Node (v18 LTS)](https://nodejs.org/en/download/)
-- [pnpm (v8.7.1+)](https://pnpm.io/installation)
+- [pnpm (v8.9.2)](https://pnpm.io/installation) ! v8.10.0 is causing issues, please use version 8.9.2 
 - [docker](https://docs.docker.com/engine/install/)
 - [Git](https://git-scm.com/downloads)
 
@@ -31,7 +31,7 @@ To get started with Scaffold-ETH 2, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/Float-Capital/scaffold-eth-2-envio.git
+git clone https://github.com/enviodev/scaffold-eth-2-envio.git
 cd scaffold-eth-2-envio
 pnpm install
 ```
